@@ -215,6 +215,7 @@ class ImageSimilarity():
         print('Time consumed:', datetime.datetime.now()-start)
         print()
 
+    # NEED TO MODIFY
     # Add for comparison with image url
     def save_data_with_url(self, title, url):
         '''Load images from `url`, extract features and fields, save as `.h5` and `.csv` files.
@@ -322,6 +323,14 @@ class ImageSimilarity():
         print()
 
         return distances
+
+    def dispose(self):
+        # self._tmp_dir = './__generated__'
+        self._batch_size = 64
+        self._num_processes = 4
+        self._model.clear_session()    
+        self._model = None
+        self._title = []
 
 
 if __name__ == '__main__':

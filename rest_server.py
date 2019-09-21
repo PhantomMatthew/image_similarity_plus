@@ -39,8 +39,8 @@ def imagecompare():
 
     '''Calculate similarities'''
     result = similarity.iteration(['test1_id', 'test1_url', 'test2_id', 'test2_url'], thresh=0.845)
-    print('Row for source file 1, and column for source file 2.')
-    print(result)
+
+    similarity.dispose()
 
     return jsonify({"similiarity": float(result[0][0])})
 

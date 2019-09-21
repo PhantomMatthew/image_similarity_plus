@@ -8,6 +8,7 @@ from tensorflow.python.keras.preprocessing import image as process_image
 from tensorflow.python.keras.utils import Sequence
 from tensorflow.python.keras.layers import GlobalAveragePooling2D
 from tensorflow.python.keras import Model
+from tensorflow.python.keras import backend
 
 
 class DeepModel():
@@ -80,6 +81,8 @@ class DeepModel():
         features = self._model.predict_generator(generator)
         return features
 
+    def clear_session(self):
+        backend.clear_session()
 
 class DataSequence(Sequence):
     '''Predict generator inherit from `keras.utils.Sequence`.'''
