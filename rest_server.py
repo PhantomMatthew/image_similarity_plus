@@ -45,4 +45,4 @@ def imagecompare():
     return jsonify({"similiarity": float(result[0][0])})
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(host = '0.0.0.0', port = 80,  debug=False)
