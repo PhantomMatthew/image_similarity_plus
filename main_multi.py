@@ -215,6 +215,53 @@ class ImageSimilarity():
         print('Time consumed:', datetime.datetime.now()-start)
         print()
 
+    # Add for comparison with image url
+    def save_data_with_url(self, title, url):
+        '''Load images from `url`, extract features and fields, save as `.h5` and `.csv` files.
+
+        Args:
+            title: title to save the results.
+            lines: lines of the source data. `url` should be placed at the end of all the fields.
+
+        Returns:
+            None. `.h5` and `.csv` files will be saved instead.
+        '''
+        # Load model
+        if self._model is None:
+            self._model = DeepModel()
+
+        print('%s: download starts.' % title)
+        start = datetime.datetime.now()
+
+        args = {'path': url[-1], 'fields': 1}
+
+        # Prediction
+        generator = self._predict_generator(args)
+        features = self._model.extract_feature(generator)
+
+        # Save files
+        if len(self._title) == 2:
+            self._title = []
+        self._title.append(title)
+
+        if not os.path.isdir(self._tmp_dir):
+            os.mkdir(self._tmp_dir)
+
+        fname_feature = os.path.join(self._tmp_dir, '_' + title + '_feature.h5')
+        with h5py.File(fname_feature, mode='w') as h:
+            h.create_dataset('data', data=features)
+        print('%s: feature saved to `%s`.' % (title, fname_feature))
+
+        fname_fields = os.path.join(self._tmp_dir, '_' + title + '_fields.csv')
+        np.savetxt(fname_fields, generator.list_of_label_fields, delimiter='\t', fmt='%s', encoding='utf-8')
+        print('%s: fields saved to `%s`.' % (title, fname_fields))
+
+        print('%s: download succeeded.' % title)
+        print('Amount:', len(generator.list_of_label_fields))
+        print('Time consumed:', datetime.datetime.now()-start)
+        print()
+
+
     def iteration(self, save_header, thresh=0.845, title1=None, title2=None):
         '''Calculate the cosine distance of two inputs, save the matched fields to `.csv` file.
 
@@ -286,7 +333,11 @@ if __name__ == '__main__':
 
     '''Load source data'''
     test1 = similarity.load_data_csv('./demo/test1.csv', delimiter=',')
+    print(type(test1))
+    print(test1)
     test2 = similarity.load_data_csv('./demo/test2.csv', delimiter=',', cols=['id', 'url'])
+    print(type(test2))
+    print(test2)
 
     '''Save features and fields'''
     similarity.save_data('test1', test1)
@@ -296,3 +347,4 @@ if __name__ == '__main__':
     result = similarity.iteration(['test1_id', 'test1_url', 'test2_id', 'test2_url'], thresh=0.845)
     print('Row for source file 1, and column for source file 2.')
     print(result)
+    print(type(result))
