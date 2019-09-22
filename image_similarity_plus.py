@@ -1,19 +1,11 @@
 from flask import Flask, jsonify, request
-import json
 from main_multi import ImageSimilarity
-
-from io import BytesIO
-from multiprocessing import Pool
-
-import os
 import datetime
 import numpy as np
-import requests
-import h5py
-
-from model_util import DeepModel, DataSequence
 
 app = Flask(__name__)
+app.config.from_pyfile('settings.py')
+
 
 @app.route("/imagecompare", methods=['POST'])
 def imagecompare():
@@ -28,8 +20,6 @@ def imagecompare():
     similarity.num_processes = 2
 
     # '''Load source data'''
-    # test1 = similarity.load_data_csv('./demo/test1.csv', delimiter=',')
-    # test2 = similarity.load_data_csv('./demo/test2.csv', delimiter=',', cols=['id', 'url'])
     test1 = np.array(['1', first_image_url], ndmin=2)
     test2 = np.array(['1', second_image_url], ndmin=2)
 
@@ -44,5 +34,6 @@ def imagecompare():
 
     return jsonify({"similiarity": float(result[0][0])})
 
-if __name__ == '__main__':
-    app.run(host = '0.0.0.0', port = 8080,  debug=False)
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0')

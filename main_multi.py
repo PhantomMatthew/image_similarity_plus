@@ -334,11 +334,15 @@ class ImageSimilarity():
 
 
 if __name__ == '__main__':
+    print("1.........." + str(datetime.datetime.now()))
+        
     similarity = ImageSimilarity()
 
     '''Setup'''
     similarity.batch_size = 16
     similarity.num_processes = 2
+
+    print("2.........." + str(datetime.datetime.now()))
 
     '''Load source data'''
     test1 = similarity.load_data_csv('./demo/test1.csv', delimiter=',')
@@ -348,12 +352,18 @@ if __name__ == '__main__':
     print(type(test2))
     print(test2)
 
+    print("3.........." + str(datetime.datetime.now()))
+
     '''Save features and fields'''
     similarity.save_data('test1', test1)
     similarity.save_data('test2', test2)
+
+    print("4.........." + str(datetime.datetime.now()))
 
     '''Calculate similarities'''
     result = similarity.iteration(['test1_id', 'test1_url', 'test2_id', 'test2_url'], thresh=0.845)
     print('Row for source file 1, and column for source file 2.')
     print(result)
     print(type(result))
+
+    print("5.........." + str(datetime.datetime.now()))
