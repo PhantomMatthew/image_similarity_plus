@@ -1,0 +1,85 @@
+{
+	"info": {
+		"_postman_id": "4b47217f-5251-4bd7-8a12-3c46556a1ba8",
+		"name": "Local",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "imagecompare",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"first\": \"http://thirdwx.qlogo.cn/mmopen/PiajxSqBRaEJTibe71nNu4lsFD3cpn39SmKPwpy5MlulMlUtFoh8x0akv2BTGh5ghbcwQDBxoqGbeiboT7RbVNUpA/132\",\n    \"second\": \"http://wx.qlogo.cn/mmhead/ver_1/gGIIbvicK9rUicic7yovAqBhK2QzYYIiaIwOf8jIObH3l9I5Mu0cdQJAvicSib2e28oSO58vtfASVALutFsZPpicvmwQQ/132\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/imagecompare",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"imagecompare"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "production_imagecompare",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"first\": \"http://thirdwx.qlogo.cn/mmopen/PiajxSqBRaEJTibe71nNu4lsFD3cpn39SmKPwpy5MlulMlUtFoh8x0akv2BTGh5ghbcwQDBxoqGbeiboT7RbVNUpA/132\",\n    \"second\": \"http://wx.qlogo.cn/mmhead/ver_1/gGIIbvicK9rUicic7yovAqBhK2QzYYIiaIwOf8jIObH3l9I5Mu0cdQJAvicSib2e28oSO58vtfASVALutFsZPpicvmwQQ/132\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://23.98.34.155:8080/imagecompare",
+					"protocol": "http",
+					"host": [
+						"23",
+						"98",
+						"34",
+						"155"
+					],
+					"port": "8080",
+					"path": [
+						"imagecompare"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
