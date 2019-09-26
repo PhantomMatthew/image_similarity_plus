@@ -6,6 +6,7 @@ import urllib
 import numpy as np
 # from flask import jsonify
 
+
 def test_compare():
     image1 = cv2.imread("C:\\SourceCode\\github\\image_similarity_plus\\images\\hero1.jpg")
     image2 = cv2.imread("C:\\SourceCode\\github\\image_similarity_plus\\images\\hero3.jpg")
@@ -20,6 +21,7 @@ def test_compare():
     diff = (diff * 255).astype("uint8")
     print("SSIM: {}".format(score))
 
+
 def compare_image_in_json_file():
     comparision_result = []
     with open(".\\afu_userAccountId_5.json", 'r', encoding='UTF-8') as json_file:
@@ -31,13 +33,14 @@ def compare_image_in_json_file():
         similarity = image_compare(item['headUrl'], item['weixinAvatar'])
         item_result = {"headUrl": item['headUrl'], "weixinAvatar":item['weixinAvatar'], 
                 "weixinId": item['weixinId'], "weixinNick": item['weixinNick'], 
-                "similarity": similarity['similarity']}
+                "similarity": similarity}
 
         # comparision_result.append(",");
         comparision_result.append(str(item_result))
     
     print("comparision finished")
     return comparision_result
+
 
 def image_compare(origin=None, destination=None):
     return_value = {}
@@ -72,6 +75,7 @@ def image_compare(origin=None, destination=None):
     finally:
         return return_value
 
+
 def url_to_image(url):
 	# download the image, convert it to a NumPy array, and then read
 	# it into OpenCV format
@@ -81,9 +85,11 @@ def url_to_image(url):
 	# return the image
 	return image
 
+
 if __name__ == '__main__':
     output = compare_image_in_json_file()
-    print(output)
+    json.dump(output)
+
     # test_compare()
     
 
